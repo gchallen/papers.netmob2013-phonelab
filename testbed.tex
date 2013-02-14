@@ -2,13 +2,7 @@
 \label{sec-testbed}
 
 \PhoneLab{} was designed to fill a gap in existing smartphone experimentation
-capabilities. As mentioned earlier, current experimental approaches are
-forced to trade off, power, scale and realism. \PhoneLab{} achieves power by
-utilizing Android open-source devices and a self-signed build which allows us
-to update any software components; scale by amortizing recruitment overhead,
-management burden and incentive costs across multiple experiments; and
-realism by recruiting a diverse set of participants and limiting experimental
-intrusiveness. We describe the architecture \PhoneLab{} in more detail below.
+capabilities.\PhoneLab{} achieves power by utilizing Android open-source devices and a self-signed build which allows us to update any software components; scale by amortizing recruitment overhead, management burden and incentive costs across multiple experiments; and realism by recruiting a diverse set of participants and limiting experimental intrusiveness. We describe the architecture \PhoneLab{} in more detail below.
 
 \subsection{Overview}
 
@@ -26,11 +20,7 @@ platform over-the-air (OTA) updates. Participants are notified of new
 experiments and choose whether to participate after reviewing what
 information will be collected about them. \PhoneLab{} participants are
 \textit{required} to participate in experimentation but \textit{not required}
-to participate in any particular experiment. They may remove experiments
-that they deem too intrusive or that negatively affect their device. Some
-experiments may run in the foreground like typical applications and require
-the participant interact with them. Others may run quietly in the background
-collecting useful information. 
+to participate in any particular experiment. 
 
 \PhoneLab{} users must provide human subjects review documentation, a list of
 log tags to capture (which we describe later in this section), and their
@@ -80,63 +70,8 @@ experiment-friendly way. Controlling the platform provides the opportunity to
 supplement existing interfaces or add additional logging to make
 experimentation and data collection easier.
 
-\begin{table}[t]
-\vspace*{0.19in}
-\begin{threeparttable}
-\begin{tabularx}{\columnwidth}{lX}
-\toprule
-\textbf{CPU} & 1~GHz ARM Cortex A8 \\
-\textbf{GPU} & PowerVR SGX540 \\
-\textbf{RAM} & 512 MB\tnote{1} \\
-\textbf{Storage} & 16~GB of NAND Flash, divided into 1 and 15~GB partitions.\\
-\textbf{Battery} & \num{1500}~mAh 3.7~V Li-ion.\\
-\textbf{Display} & 4" 480~x~800 touch screen.\\
-\textbf{Networking} & 1x/3G/4G (WiMax) cellular data, 802.11 b/g/n Wifi,
-Bluetooth, NFC, and USB.\\
-\textbf{Sensors} & GPS, accelerometer, gyroscope, proximity, magnetometer and light sensor.\\
-\bottomrule
-\end{tabularx}
-
-{\footnotesize
-\begin{tablenotes}
-\item [1] 128~MB is reserved for the GPU.
-\end{tablenotes}}
-
-\caption{\textbf{The Samsung Nexus S 4G smartphone.}}
-\label{table-nexuss4g}
-\end{threeparttable}
-\end{table}
-
-We have distributed Nexus S 4G smartphones to our first group of
-participants. The Nexus S 4G was first released by Sprint in May, 2011, and
-was one of the official AOSP development phones at the time \PhoneLab{}
-development began. Its features are summarized in Table~\ref{table-nexuss4g}.
-While we expect to receive yearly phone upgrades and will distribute a more
-up-to-date device to our second group of participants, we anticipate that the
-prohibitive cost of the newest flagship smartphones will prevent us from ever
-deploying them on \PhoneLab{}.
 
 \subsection{Participants}
-
-Recruiting a large number of \PhoneLab{} participants requires effective
-incentives. In their first year of \PhoneLab{} participation, voice, data and
-messaging are free with funding provided by the National Science Foundation
-(NSF). This free year of service plays a major role in our recruiting
-efforts. In subsequent years, participants pay a deeply discounted \$45 per
-month rate for unlimited data and messaging through a deal negotiated with
-Sprint. Sprint has proved to be an ideal partner for the \PhoneLab{} project,
-both helpful with testbed logistics and still willing to provide unlimited
-data plans to subscribers.
-
-Because participants may leave at any time, the front-loaded cost structure
-of our incentives makes it most efficient to recruit participants who will be
-able to continue as part of \PhoneLab{} for multiple years. While we
-anticipate that some of our first group of participants will leave after a
-single year, interviews with them will help us identify long-term
-participants during subsequent years. Long-term participants allow us to
-amortize the first free year and provide a stable group comfortable being a
-part of \PhoneLab{} experimentation.
-
 When recruiting our first batch of participants, we intended to target freshman
 and sophomore SUNY Buffalo (UB) students as well as incoming PhD students. The
 University at Buffalo has a large international graduate student community, and
@@ -175,33 +110,9 @@ ranges are inclusive.}
 
 In the end, we believe that we were successful in recruiting potential
 long-term participants. Table~\ref{table-demographics} describes the
-demographic breakdown that we achieved. We have handed out our phones to
-several masters or senior students because they are involved \PhoneLab{}
-research. The majority consists of potential long-term participants. Roughly
-half of our participants are first- and second-year undergraduates, a quarter
-PhD students, and a fifth faculty, staff and other professionals. However,
-males greatly outnumber females, and the young outnumber the middle-aged and
-older, both unrepresentative features we will try and rectify in year two.
-For management reasons we limited participation to people with a SUNY Buffalo
-affiliation except for several exceptions: a local reporter, a technology
-writer, and an international rock star.
+demographic breakdown that we achieved. 
 
 \subsection{Testbed Software}
-
-\PhoneLab{} devices are deployed with a small piece of testbed management
-software embedded in the Android platform image. This heartbeat service
-uploads periodic reports including information about device location, battery
-levels, and the installation status of other core \PhoneLab{} components.
-This information is only used for testbed management and will never be
-released to researchers.
-
-The heartbeat service is also responsible for starting the primary
-\PhoneLab{} configuration and data collection software when the phone boots,
-which allows us to bypass an Android security feature that normally prevents
-services from running in the background unless started by a foreground
-application. In order to remain unobtrusive, our experimental management
-software does not have a foreground component and thus would not normally be
-able to start.
 
 Experimental configuration, log collection, data upload and platform updates
 are performed by the \PhoneLab{} experimental harness, which is installed and
@@ -248,11 +159,6 @@ mechanisms. First, we require an Institutional Review Board (IRB) to review
 each \PhoneLab{} experiment for human subjects compliance. IRB approval or an
 official waiver is required before any \PhoneLab{} any experiment can begin.
 
-Second, we distribute experimental applications to a group of developers
-prior to broader release, allowing us to identify any significant problems
-before they reach our participants. This step is particularly important for
-platform experiments, which must be established as stable before being
-distributed.
 
 Finally, we utilize Android's existing safety and privacy mechanisms.
 Participants are presented with the typical Android privacy dialog during
@@ -265,25 +171,6 @@ the experiment and notify the researcher.
 
 \input{./figures/logging/table.tex}
 
-\subsection{Bootstrapping and Management}
-
-We began advertising \PhoneLab{} on campus via posters, flyers, Facebook, and
-mass emails in late July, 2012. As mentioned previously, \PhoneLab{} phone
-distribution began on August 24, 2012. Most phones were distributed between
-August 24, 2012 and August 31, 2012. Our initial plan was to distribute 200
-phones during that period, but we ran into an unexpected shortage of
-supplies for Nexus S 4G. Due to this reason, the last device was handed out on
-October 29, 2012.
-
-We delayed the release of our experimental harness for two months until
-November 8, 2012. This was done for several reasons. First, we wanted to
-complete the distribution of phones. Second, we wanted to complete development
-and testing of the harness and backend infrastructure. Third, we wanted to
-receive training in human subjects experimentation and prepare the materials for
-our first experiment. Finally, the delay allowed our participants to develop
-normal usage patterns before experimentation began. For this last reason, we may
-repeat a shorter version of this delay with subsequent new groups of \PhoneLab{}
-participants.
 
 \input{./figures/statistics/tag_table/table.tex}
 
