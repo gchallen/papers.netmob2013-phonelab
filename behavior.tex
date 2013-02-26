@@ -1,0 +1,115 @@
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.8\textwidth]{./figs/network-transitions.pdf}
+\caption{\textbf{3G to Wifi transition locations.} The map indicates that
+there are several common areas where network hand-offs occur.}
+\label{figure-networktransitions}
+\end{figure*}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.7\textwidth]{./figs/battery-breakdown.pdf}
+\caption{\textbf{Power usage by component.} The large bar at left shows an
+aggregated breakdown for all participants. The participant bars are scaled
+against the participant with the most energy usage.}
+\label{figure-batteryoverview}
+\end{figure*}
+
+\section{Participant Behavior}
+\label{sec-usage}
+
+We have conducted a usage measurement study with 115 participants over 21 days.
+For this purpose, we have developed a measurement application that collects all
+salient features of smartphone usage: networking, mobility, power consumption,
+and application usage.
+
+This section presents some of the early results of this study. We show the
+network transition behavior between 3G and WiFi first and the battery and
+charging behavior next.
+
+\subsection{Mobile Network Transitions}
+\label{subsec-networktransitions}
+
+Mobile devices like smartphones move through a complex network environment.
+Providing the illusion of seamless connectivity requires negotiating hand-offs
+both between Wifi access points and between Wifi and 3G radios. We were
+interested in observing hand-offs between 3G (provided by Sprint, \PhoneLab{}'s
+operational partner) and Wifi and found many in the dataset collected by our
+usage experiment. Since the Android \texttt{ConnectivityService} frequently
+switches network interfaces for exploration purposes, we have defined a
+transition as two one-minute or longer sessions on different interfaces
+separated by less than one minute. We further limit ourselves to cases where we
+received a location update during the transition.
+
+Figure~\ref{figure-networktransitions} plots the location of transitions that
+occurred on or near SUNY North Campus. We notice that many cluster in
+expected locations: near the entrance and exits of buildings where
+participants are likely to be moving from campus Wifi to 3G.
+
+\subsection{Energy Breakdown}
+
+A single-day component-by-component breakdown is shown in
+Figure~\ref{figure-batteryoverview}. Our results are similar to those reported
+by a previous smaller-scale study~\cite{shye:micro:2009}, and indicate that
+mobile data (labeled as ``Idle data'' and ``Active data'' depending on the
+state), the screen, and CPU usage are the main sources of smartphone power
+consumption. The per-participant bars also show a great deal of variation, with
+differences in both the amount and the breakdown of energy consumed by each
+participant.
+
+One supposedly power-hungry component that has less of an impact than we had
+expected is the GPS. This is particularly surprising given the large amount
+of location-monitoring work motivated by GPS power consumption. One of
+several factors may be at work. First, the Android platform estimates the GPS
+chipset current consumption at 50~mA. This number is used by the standard
+``Fuel Gauge'' battery monitor and by our calculations. However, it is lower
+than the data sheet for the Broadcom 4751 GPS receiver~\cite{bcm4751} and may
+represent a best-case average. Still, even if the GPS current consumption is
+off by as much as a factor of five, it does not represent a significant
+contribution. Other hypotheses are that Android network location is providing
+location with sufficient accuracy for many applications, eliminating the need
+for GPS, or participants and applications may simply be conscious of GPS
+power consumption and taking steps to control it.
+
+\subsection{Opportunistic Charging}
+\label{subsec-opportunistic}
+
+One way that users work around the battery limitations of their smartphone
+devices is by finding new times and places to charge their phones: plugging
+in at their desk at work, in the car during their commute, or at home before
+a long night out. We refer to these charging sessions as
+\textit{opportunistic} to distinguish them from \textit{habitual} nightly
+charging. Assuming that many smartphone users encounter plug points
+throughout the day, engaging in opportunistic charging becomes an additional
+sign of energy awareness, and understanding opportunistic charging becomes
+necessary to improving energy management on mobile devices. Others have analyzed
+this behavior before~\cite{banerjee:ubicomp:2007, rahmati:mobilehci:2007} and
+our goal is to examine the battery charging behavior of \PhoneLab{} partipants.
+
+Figure~\ref{fig-opportunistic-patterns} shows that many users engage in
+opportunistic charging. We define a charging session as opportunistic if is
+long enough to not be spurious (over 10~minutes) but does not bring the
+battery to a fully-charged state, indicating that the user disconnected the
+device before charging could finish. For a representative day during our
+experiment, of the 245 charging sessions we observed that day, 96 (39\%) were
+opportunistic by this definition. 50 of 95 active participants engaged in
+opportunistic charging at some point during our experiment an average of once
+per day.
+
+\begin{figure}[th!]
+\centering
+\includegraphics[width=0.7\columnwidth]{./figs/opportunistic.pdf}
+\caption{\textbf{Patterns of opportunistic charging.} Many users perform
+opportunistic charging multiple times during the day.}
+\label{fig-opportunistic-patterns}
+\end{figure}
+
+Opportunistic charging may be a response to an anticipated need for more
+smartphone battery power: the student who plugs her smartphone in for a brief
+charge before a night out. Our data also allowed us to examine how many of
+these opportunistic charging sessions were necessary to bridge the gap to the
+next full charge. We found that 24 of the 96 (25\%) of the opportunistic
+charges we observed were necessary. We believe that this indicates that
+participants have responded to their smartphones' battery limitations by
+engaging in conservative charging behavior, grabbing power whenever possible
+even if they do not anticipate needing it later.

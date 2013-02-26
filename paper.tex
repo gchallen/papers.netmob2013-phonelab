@@ -1,43 +1,82 @@
-\input{./include/start.tex}
+\documentclass[10pt,twocolumn]{article}
+\usepackage[letterpaper,height=9.0in,width=6.5in,columnsep=0.25in]{geometry}
+
+\usepackage{verbatim}
+\usepackage{times}
+\usepackage{setspace}
+\usepackage{epsfig}
+%\usepackage{amssymb}
+%\usepackage{amsmath}
+%\usepackage{amsfonts}
+%\usepackage{amsthm}
+\usepackage{xspace}
+\usepackage{subfigure}
+\usepackage{bibspacing}
+\usepackage{color}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage[small,compact]{titlesec}
+\usepackage[footnotesize,bf]{caption}
+\usepackage{threeparttable}
+\usepackage{tabularx}
+\usepackage{booktabs}
+
+\singlespacing
+
+\newcommand{\ie}{i.e.}
+\newcommand{\eg}{e.g.}
+\newcommand{\PhoneLab}{\textsc{PhoneLab}}
+
+%
+%
+% Give latex lots of freedom to cram figures onto pages that
+% already have figures or text (and not much freedom to create partially
+% full pages of only figures)
+%
+\renewcommand{\textfraction}{0.01}
+\setcounter{topnumber}{100}
+\setcounter{dbltopnumber}{100}
+\setcounter{totalnumber}{100}
+\renewcommand{\topfraction}{.9}
+\renewcommand{\floatpagefraction}{.9}
+\renewcommand{\dbltopfraction}{.9}
+\renewcommand{\dblfloatpagefraction}{.9}
+
+%
+% Figure stuff
+%
+\renewcommand{\figurename}{Fig.}
+
+\newcommand{\captionfonts}{\footnotesize}
+\setlength{\abovecaptionskip}{0in}
+\setlength{\belowcaptionskip}{-.0in}
+
+\hyphenation{Phone-Lab}
+
 \begin{document}
+\date{}
 
-\title{\textsc{\LARGE PhoneLab}: A Large Programmable Smartphone Testbed}
-
-\numberofauthors{1}
+\title{Participant Behavior in \textsc{PhoneLab}}
 
 \author{
-\alignauthor
 Anandatirtha Nandugudi, Anudipa Maiti, Fatih Bulut, Sonali Batra, Taeyeon Ki\\
-Murat Demirbas, Tevfik Kosar, Chunming Qiao, Steven Y. Ko and Geoffrey Challen\\[0.06in]
-\affaddr{Department of Computer Science and Engineering}\\
-\affaddr{University at Buffalo, The State University of New York}\\[0.06in]
-\email{team@phone-lab.org}
-\email{http://www.phone-lab.org}
+Geoffrey Challen, Murat Demirbas, Steven Y. Ko, Tevfik Kosar, and Chunming
+Qiao\\
+\\
+Department of Computer Science and Engineering\\
+University at Buffalo, The State University of New York\\
+\href{mailto:team@phone-lab.org}{\nolinkurl{team@phone-lab.org}}
 }
 
 \maketitle
 
-\begin{abstract}
-\input{abstract.tex}
-\end{abstract}
+\pagestyle{empty}
 
-\input{introduction.tex}
-\input{comparison.tex}
+\input{intro.tex}
+\input{behavior.tex}
+\input{conclusion.tex}
 
-\input{testbed.tex}
-\input{logging.tex}
-%\input{experiment.tex}
-
-%\input{batteryoverview.tex}
-%\input{opportunistic.tex}
-%\input{networktransitions.tex}
-%\input{apptransitions.tex}
-%\input{locationsharing.tex}
-
-%\input{related.tex}
-\input{conclusions.tex}
-
-\bibliographystyle{abbrv}
-\bibliography{references}
+{\footnotesize \bibliographystyle{abbrv}
+\bibliography{paper}}
 
 \end{document}
